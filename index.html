@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salchipapería La Burra | Midnight Premium</title>
+    
+    <!-- Fuentes e Iconos de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+    
+    <style>
+        /* Variables Nivel Premium - Midnight Theme */
+        :root {
+            color-scheme: dark; /* ¡CLAVE! Obliga al navegador a usar scrollbars y menús nativos en modo oscuro */
+            --primary: #E63946;
+            --primary-dark: #B92B37;
+            --accent: #F4A261;
+            --yape: #00EDA0;
+            --yape-bg: #742284;
+            --whatsapp: #25D366;
+            --bg-color: #0F0F13;
+            --surface: #1C1C22;
+            --surface-light: #2A2A32;
+            --text-main: #FFFFFF;
+            --text-light: #A0A0A5;
+            --border-radius-lg: 24px;
+            --border-radius-md: 16px;
+            --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 8px 30px rgba(230, 57, 70, 0.25);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            padding-bottom: 120px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Section Premium con Gradiente Nocturno */
+        header { 
+            background: linear-gradient(180deg, #1A1A24 0%, var(--bg-color) 100%);
+            padding: 4rem 1rem 3rem; 
+            text-align: center; 
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.1); padding: 8px 16px; 
+            border-radius: 50px; font-size: 0.9rem; font-weight: 600;
+            margin-bottom: 1.5rem; backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .status-open .status-dot { background: #00E676; box-shadow: 0 0 10px #00E676; }
+        .status-closed .status-dot { background: #FF3D00; box-shadow: 0 0 10px #FF3D00; }
+
+        header h1 { 
+            font-size: clamp(2.5rem, 5vw, 4rem); 
+            font-weight: 800; letter-spacing: -1px; margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #FFF, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        header p { color: var(--text-light); font-size: 1.1rem; }
+        
+        .schedule-info {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--accent); margin-top: 15px; font-size: 0.95rem; font-weight: 500;
+        }
+
+        .container { max-width: 1200px; margin: 2rem auto 0; padding: 0 24px; }
+        
+        .section-title { 
+            font-size: 2rem; font-weight: 700; margin-bottom: 2rem; 
+            display: flex; align-items: center; gap: 10px;
+        }
+        .section-title span { color: var(--primary); }
+
+        /* Tarjetas estilo "Glassmorphism Oscuro" */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+
+        .card { 
+            background: var(--surface); padding: 1.5rem; 
+            border-radius: var(--border-radius-lg); 
+            box-shadow: var(--shadow-sm); 
+            border: 1px solid rgba(255,255,255,0.03);
+            display: flex; flex-direction: column; 
+            transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-8px); border-color: rgba(230, 57, 70, 0.3); box-shadow: var(--shadow-glow); }
+
+        .card-img-wrapper { 
+            overflow: hidden; border-radius: var(--border-radius-md); 
+            margin-bottom: 1.5rem; aspect-ratio: 4/3; background: #000;
+        }
+        .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; opacity: 0.9; }
+        .card:hover img { transform: scale(1.08); opacity: 1; }
+        
+        .card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem; line-height: 1.5; flex-grow: 1; }
+        
+        /* Comunicado de Presas Elegante */
+        .disclaimer-box {
+            background: rgba(244, 162, 97, 0.08);
+            border-left: 3px solid var(--accent);
+            padding: 12px; border-radius: 8px; margin-bottom: 1.5rem;
+            display: flex; gap: 10px; align-items: flex-start;
+        }
+        .disclaimer-box .material-symbols-rounded { color: var(--accent); font-size: 1.2rem; margin-top: 2px; }
+        .disclaimer-box p { margin: 0; font-size: 0.85rem; color: #E2E2E2; }
+
+        /* Controles Neón Oscuro */
+        .controls { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.5rem; }
+        .controls select {
+            width: 100%; padding: 12px 16px; 
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            font-family: inherit; font-size: 0.9rem; font-weight: 500;
+            background: var(--surface-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 12px center;
+            background-size: 16px; color: var(--text-main);
+            appearance: none; cursor: pointer; transition: var(--transition);
+        }
+        .controls select:focus { border-color: var(--primary); outline: none; background-color: rgba(230, 57, 70, 0.05); }
+        
+        /* Forzando el color de las opciones internas para evitar fallos en algunos sistemas */
+        .controls select option {
+            background-color: var(--surface);
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        
+        /* Precios */
+        .price-qty-row { 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin-bottom: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .price { font-weight: 800; font-size: 1.5rem; color: var(--primary); }
+        
+        .qty-wrapper { 
+            display: flex; align-items: center; background: var(--surface-light); 
+            border-radius: 12px; padding: 4px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .qty-btn { 
+            background: none; border: none; font-size: 1.2rem; cursor: pointer; 
+            width: 32px; height: 32px; border-radius: 8px; color: var(--text-main); transition: 0.2s;
+        }
+        .qty-btn:hover { background: rgba(255,255,255,0.1); }
+        .item-qty { 
+            width: 35px; text-align: center; border: none; background: transparent; 
+            color: white; font-weight: 700; font-family: inherit; outline: none;
+            -moz-appearance: textfield;
+        }
+
+        /* Botón Agregar */
+        .btn-add { 
+            background: var(--primary); color: white; border: none; padding: 14px; 
+            border-radius: 14px; font-weight: 600; font-size: 1rem; cursor: pointer; 
+            transition: var(--transition); width: 100%;
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+        }
+        .btn-add:hover { background: var(--primary-dark); box-shadow: var(--shadow-glow); }
+
+        /* SECCIÓN MULTIMEDIA (TikTok y Mapa) */
+        .bottom-media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 4rem; }
+        .media-box { background: var(--surface); padding: 2rem; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .media-box h3 { font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 8px; color: white; }
+        .map-container iframe { width: 100%; border-radius: var(--border-radius-md); box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
+        .tiktok-wrapper { display: flex; justify-content: center; width: 100%; overflow: hidden; border-radius: var(--border-radius-md); background: #000; }
+
+        /* FAB y Carrito Modales */
+        .cart-fab {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--accent); color: #0F0F13; border: none; 
+            border-radius: 50px; padding: 16px 24px;
+            font-size: 1.1rem; font-weight: 700; font-family: inherit;
+            cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 10px 25px rgba(244, 162, 97, 0.4); transition: var(--transition);
+        }
+        .cart-fab:hover { transform: scale(1.05) translateY(-5px); }
+        .cart-badge { background: #0F0F13; color: var(--accent); padding: 4px 10px; border-radius: 20px; font-size: 0.9rem; font-weight: 800; }
+
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1001; opacity: 0; visibility: hidden; transition: var(--transition); }
+        .cart-overlay.open { opacity: 1; visibility: visible; }
+
+        .cart-modal {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 450px; height: 100vh;
+            background: var(--surface); box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+            z-index: 1002; transition: right 0.4s ease; display: flex; flex-direction: column;
+            border-left: 1px solid rgba(255,255,255,0.05);
+        }
+        .cart-modal.open { right: 0; }
+        
+        .cart-header { padding: 2rem; background: var(--surface); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .close-cart { background: var(--surface-light); border: none; color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        
+        .cart-items { padding: 1.5rem; flex-grow: 1; overflow-y: auto; background: var(--bg-color); }
+        .cart-item { background: var(--surface); border-radius: var(--border-radius-md); padding: 1.2rem; margin-bottom: 1rem; border: 1px solid rgba(255,255,255,0.05); position: relative; }
+        .btn-remove { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #555; cursor: pointer; transition: 0.2s; }
+        .btn-remove:hover { color: var(--primary); }
+        .cart-item-title { font-weight: 700; color: white; padding-right: 25px; }
+        .cart-item-details { font-size: 0.85rem; color: var(--text-light); margin: 6px 0; }
+        
+        /* Instrucciones de preparación */
+        .order-notes-wrapper { margin-top: 1rem; }
+        .order-notes-wrapper textarea {
+            width: 100%; background: var(--surface-light); border: 1px solid rgba(255,255,255,0.1);
+            color: white; border-radius: 12px; padding: 12px; font-family: inherit; font-size: 0.9rem;
+            resize: none; outline: none; transition: 0.3s;
+        }
+        .order-notes-wrapper textarea:focus { border-color: var(--accent); }
+
+        .cart-footer { padding: 1.5rem; background: var(--surface); border-top: 1px solid rgba(255,255,255,0.05); }
+        .pay-options { display: flex; gap: 10px; margin-bottom: 1.5rem; }
+        .pay-option { 
+            flex: 1; border: 2px solid rgba(255,255,255,0.1); padding: 10px; 
+            border-radius: 12px; text-align: center; cursor: pointer; font-weight: 600; 
+            transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 6px; 
+        }
+        .pay-option input { display: none; }
+        .pay-option.selected.yape { border-color: var(--yape); background: rgba(116, 34, 132, 0.2); color: var(--yape); }
+        .pay-option.selected.cash { border-color: var(--whatsapp); background: rgba(37, 211, 102, 0.1); color: var(--whatsapp); }
+
+        .cart-total { font-size: 1.5rem; font-weight: 800; display: flex; justify-content: space-between; margin-bottom: 1rem; }
+        .btn-checkout { 
+            width: 100%; background: var(--whatsapp); color: #000; border: none; padding: 16px; 
+            border-radius: 14px; font-size: 1.1rem; font-weight: 700; cursor: pointer; 
+            display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; 
+        }
+
+        /* Yape Modal */
+        .yape-modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
+            background: var(--yape-bg); color: white; padding: 2rem; border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); z-index: 2000;
+            width: 90%; max-width: 380px; text-align: center;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+        .yape-modal.show { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+        .yape-modal .btn-checkout { background: var(--yape); color: #000; margin-top: 1rem; }
+        .qr-placeholder { background: white; border-radius: 16px; padding: 15px; margin: 1rem auto; width: 220px; height: 220px; }
+        
+        #toast {
+            visibility: hidden; min-width: 250px; background: var(--accent); color: #000; 
+            text-align: center; border-radius: 50px; padding: 14px 24px; 
+            position: fixed; z-index: 3000; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(20px); 
+            font-size: 0.95rem; font-weight: 700; opacity: 0; transition: all 0.4s ease;
+        }
+        #toast.show { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Indicador de Abierto/Cerrado -->
+    <div class="status-badge" id="store-status">
+        <div class="status-dot"></div>
+        <span id="status-text">Verificando horario...</span>
+    </div>
+
+    <h1>La Burra</h1>
+    <p>La verdadera sazón arequipeña. Delivery nocturno.</p>
+    <div class="schedule-info">
+        <span class="material-symbols-rounded">schedule</span> Horario: 7:00 PM - 11:30 PM
+    </div>
+</header>
+
+<div class="container">
+    <h2 class="section-title"><span class="material-symbols-rounded">local_fire_department</span> Nuestro Menú</h2> 
+    
+    <div class="menu-grid">
+        
+        <!-- Salchipapa -->
+        <div class="card" data-name="Salchipapa Clásica">
+            <div class="card-img-wrapper"><img src="salchipapa.jpg" alt="Salchipapa"></div>
+            <h3>Salchipapa Clásica</h3>
+            <p>Papas fritas extra crocantes, salchicha premium jugosa y todas nuestras cremas artesanales.</p>
+            <div class="controls">
+                <select class="item-opcion">
+                    <option value="Solo papa">Solo papa crocante</option>
+                    <option value="Con arroz">Base de Arroz Amarillo</option>
+                </select>
+            </div>
+            <div class="price-qty-row">
+                <span class="price" data-baseprice="12">S/ 12.00</span>
+                <div class="qty-wrapper">
+                    <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                    <input type="number" class="item-qty" value="1" min="1" readonly>
+                    <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                </div>
+            </div>
+            <button class="btn-add" onclick="agregarAlCarrito(this)">
+                <span class="material-symbols-rounded">add_shopping_cart</span> Agregar
+            </button>
+        </div>
+        
+        <!-- Pollo a la Olla -->
+        <div class="card" data-name="Pollo a la Olla">
+            <div class="card-img-wrapper"><img src="medio.jpg" alt="Pollo a la olla"></div>
+            <h3>Pollo a la Olla</h3>
+            <p>Pollo tierno bañado en su jugo, con arroz amarillo y papas fritas.</p>
+            
+            <!-- Comunicado Elegante -->
+            <div class="disclaimer-box">
+                <span class="material-symbols-rounded">info</span>
+                <p>Haremos todo lo posible por enviarte la presa que elijas. Si se agota, te enviaremos la mejor alternativa disponible. ¡Gracias por entender!</p>
+            </div>
+
+            <div class="controls">
+                <select class="item-tamano" onchange="actualizarPresas(this)">
+                    <option value="1/8" data-price="16">1/8 de Pollo - S/ 16.00</option>
+                    <option value="1/4" data-price="24">1/4 de Pollo - S/ 24.00</option>
+                </select>
+                <select class="item-presa">
+                    <option value="Pierna">Presa: Pierna</option>
+                    <option value="Entrepierna">Presa: Entrepierna</option>
+                    <option value="Ala">Presa: Ala</option>
+                    <option value="Pecho">Presa: Pecho</option>
+                </select>
+            </div>
+            <div class="price-qty-row">
+                <span class="price" data-baseprice="16">S/ 16.00</span>
+                <div class="qty-wrapper">
+                    <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                    <input type="number" class="item-qty" value="1" min="1" readonly>
+                    <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                </div>
+            </div>
+            <button class="btn-add" onclick="agregarAlCarrito(this)">
+                <span class="material-symbols-rounded">add_shopping_cart</span> Agregar
+            </button>
+        </div>
+
+        <!-- Chicha Morada -->
+        <div class="card" data-name="Chicha Morada">
+            <div class="card-img-wrapper"><img src="chicha.jpeg" alt="Chicha"></div>
+            <h3>Chicha Morada</h3>
+            <p>Néctar de los incas. Preparada en casa con maíz morado, piña y canela.</p>
+            <div class="controls">
+                <select class="item-tamano" onchange="actualizarPrecioSimple(this)">
+                    <option value="Vaso 500ml" data-price="5">Vaso 500ml - S/ 5.00</option>
+                    <option value="Jarra 1L" data-price="10">Jarra 1 Litro - S/ 10.00</option>
+                </select>
+                <select class="item-opcion">
+                    <option value="Helada">Bien Helada</option>
+                    <option value="Al tiempo">Al tiempo</option>
+                </select>
+            </div>
+            <div class="price-qty-row">
+                <span class="price" data-baseprice="5">S/ 5.00</span>
+                <div class="qty-wrapper">
+                    <button class="qty-btn" onclick="updateQty(this, -1)">-</button>
+                    <input type="number" class="item-qty" value="1" min="1" readonly>
+                    <button class="qty-btn" onclick="updateQty(this, 1)">+</button>
+                </div>
+            </div>
+            <button class="btn-add" onclick="agregarAlCarrito(this)">
+                <span class="material-symbols-rounded">add_shopping_cart</span> Agregar
+            </button>
+        </div>
+
+    </div>
+
+    <!-- SECCIÓN MULTIMEDIA (TikTok y Mapa) -->
+    <div class="bottom-media-grid">
+        <!-- TIKTOK -->
+        <div class="media-box">
+            <h3><span class="material-symbols-rounded" style="color: var(--accent);">music_note</span> En TikTok</h3>
+            <div class="tiktok-wrapper">
+                <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@tragaytrago.pe/video/7226813214296804614" data-video-id="7226813214296804614" style="max-width: 100%; min-width: 250px; margin:0;" > <section> <a target="_blank" title="@tragaytrago.pe" href="https://www.tiktok.com/@tragaytrago.pe?refer=embed">@tragaytrago.pe</a></section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+            </div>
+        </div>
+        
+        <!-- MAPA -->
+        <div class="media-box map-container">
+            <h3><span class="material-symbols-rounded" style="color: var(--primary);">location_on</span> Nuestro Point</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1260.9508053527204!2d-71.51543062770784!3d-16.388811546107476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424b00171f828b%3A0x91d23289d1dec3b5!2sBurrita!5e1!3m2!1ses!2spe!4v1782439812976!5m2!1ses!2spe" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+    </div>
+</div>
+
+<button class="cart-fab" onclick="toggleCart()">
+    <span class="material-symbols-rounded">shopping_bag</span>
+    Tu Orden <span class="cart-badge" id="cart-count">0</span>
+</button>
+
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<div class="cart-modal" id="cartModal">
+    <div class="cart-header">
+        <h2>Mi Pedido</h2>
+        <button class="close-cart" onclick="toggleCart()"><span class="material-symbols-rounded">close</span></button>
+    </div>
+    
+    <div class="cart-items">
+        <div id="cart-items-container"></div>
+        
+        <!-- Notas Especiales -->
+        <div class="order-notes-wrapper" id="notes-container" style="display:none;">
+            <p style="font-size: 0.9rem; margin-bottom: 5px; color: var(--accent);"><span class="material-symbols-rounded" style="font-size: 1rem; vertical-align: text-bottom;">edit_note</span> ¿Alguna instrucción especial?</p>
+            <textarea id="order-notes" rows="2" placeholder="Ej: Las papas bien fritas, crema aparte, poco ají..."></textarea>
+        </div>
+    </div>
+    
+    <div class="cart-footer">
+        <div class="pay-options">
+            <label class="pay-option yape selected" onclick="selectPayment('yape')">
+                <input type="radio" name="pago" value="yape" checked> Yape
+            </label>
+            <label class="pay-option cash" onclick="selectPayment('efectivo')">
+                <input type="radio" name="pago" value="efectivo"> Efectivo
+            </label>
+        </div>
+        
+        <div class="cart-total">Total <span style="color:var(--primary)">S/ <span id="cart-total-price">0.00</span></span></div>
+        <button class="btn-checkout" onclick="procesarCheckout()">
+            Enviar Pedido <span class="material-symbols-rounded">arrow_forward</span>
+        </button>
+    </div>
+</div>
+
+<!-- Modal Yape -->
+<div class="cart-overlay" id="yapeOverlay" onclick="closeYapeModal()"></div>
+<div class="yape-modal" id="yapeModal">
+    <h2 style="margin-bottom: 10px;">Yapea tu pedido</h2>
+    <div class="qr-placeholder">
+        <img src="tu-qr.jpg" alt="QR Yape" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+    </div>
+    <p>Total a pagar: <strong>S/ <span id="yape-amount">0.00</span></strong></p>
+    <button class="btn-checkout" onclick="enviarPedidoWhatsApp('Yape')">
+        <span class="material-symbols-rounded">verified</span> Enviar voucher
+    </button>
+</div>
+
+<div id="toast">Agregado al carrito 😋</div>
+
+<script>
+    // --- Lógica de Horario Comercial ---
+    function checkBusinessHours() {
+        const now = new Date();
+        const hour = now.getHours();
+        const minutes = now.getMinutes();
+        
+        // Convierte el tiempo actual a un número flotante (ej. 19:30 = 19.5)
+        const currentTime = hour + (minutes / 60);
+        
+        // Horario: 19:00 (7 PM) a 23:50 (11:30 PM) -> 19.0 a 23.5
+        const isOpen = currentTime >= 19.0 && currentTime <= 23.5;
+        
+        const badge = document.getElementById('store-status');
+        const text = document.getElementById('status-text');
+        
+        if(isOpen) {
+            badge.className = 'status-badge status-open';
+            text.innerText = '🟢 Abierto Ahora';
+        } else {
+            badge.className = 'status-badge status-closed';
+            text.innerText = '🔴 Cerrado en este momento';
+        }
+    }
+    
+    // Chequear al cargar la página
+    checkBusinessHours();
+    // Actualizar cada minuto
+    setInterval(checkBusinessHours, 60000);
+
+    // --- LOGICA DEL CARRITO ---
+    let carrito = [];
+    let metodoPago = 'yape';
+
+    function updateQty(btn, change) {
+        const input = btn.parentElement.querySelector('.item-qty');
+        let newVal = parseInt(input.value) + change;
+        if (newVal >= 1) input.value = newVal;
+    }
+
+    function actualizarPresas(selectTamano) {
+        const tarjeta = selectTamano.closest('.card');
+        const selectPresa = tarjeta.querySelector('.item-presa');
+        const spanPrecio = tarjeta.querySelector('.price');
+        
+        const precio = selectTamano.options[selectTamano.selectedIndex].dataset.price;
+        spanPrecio.dataset.baseprice = precio;
+        spanPrecio.innerText = `S/ ${parseFloat(precio).toFixed(2)}`;
+
+        if (selectTamano.value === '1/8') {
+            selectPresa.innerHTML = `<option>Presa: Pierna</option><option>Presa: Entrepierna</option><option>Presa: Ala</option><option>Presa: Pecho</option>`;
+        } else {
+            selectPresa.innerHTML = `<option>Presa: Pecho</option><option>Presa: Pierna</option>`;
+        }
+    }
+
+    function actualizarPrecioSimple(selectTamano) {
+        const spanPrecio = selectTamano.closest('.card').querySelector('.price');
+        const precio = selectTamano.options[selectTamano.selectedIndex].dataset.price;
+        spanPrecio.dataset.baseprice = precio;
+        spanPrecio.innerText = `S/ ${parseFloat(precio).toFixed(2)}`;
+    }
+
+    function agregarAlCarrito(boton) {
+        const tarjeta = boton.closest('.card');
+        const nombre = tarjeta.dataset.name;
+        const precio = parseFloat(tarjeta.querySelector('.price').dataset.baseprice);
+        const cantidad = parseInt(tarjeta.querySelector('.item-qty').value);
+        
+        let detalles = Array.from(tarjeta.querySelectorAll('select')).map(sel => sel.options[sel.selectedIndex].text);
+
+        carrito.push({ nombre, detalles: detalles.join(' | '), precio, cantidad, subtotal: precio * cantidad });
+        tarjeta.querySelector('.item-qty').value = 1;
+        
+        actualizarUICarrito();
+        mostrarToast();
+    }
+
+    function actualizarUICarrito() {
+        const contenedor = document.getElementById('cart-items-container');
+        const notesContainer = document.getElementById('notes-container');
+        let total = 0, items = 0;
+
+        if (carrito.length === 0) {
+            contenedor.innerHTML = `<p style="text-align:center; color:var(--text-light); margin-top:2rem;">Tu carrito está vacío.</p>`;
+            notesContainer.style.display = 'none';
+        } else {
+            contenedor.innerHTML = '';
+            carrito.forEach((item, index) => {
+                total += item.subtotal;
+                items += item.cantidad;
+                contenedor.innerHTML += `
+                    <div class="cart-item">
+                        <button class="btn-remove" onclick="eliminar(${index})"><span class="material-symbols-rounded">delete</span></button>
+                        <div class="cart-item-title">${item.cantidad}x ${item.nombre}</div>
+                        <div class="cart-item-details">${item.detalles}</div>
+                        <div style="color:var(--accent); font-weight:bold;">S/ ${item.subtotal.toFixed(2)}</div>
+                    </div>`;
+            });
+            notesContainer.style.display = 'block';
+        }
+
+        document.getElementById('cart-total-price').innerText = total.toFixed(2);
+        document.getElementById('yape-amount').innerText = total.toFixed(2);
+        document.getElementById('cart-count').innerText = items;
+    }
+
+    function eliminar(index) { carrito.splice(index, 1); actualizarUICarrito(); }
+
+    function toggleCart() {
+        document.getElementById('cartModal').classList.toggle('open');
+        document.getElementById('cartOverlay').classList.toggle('open');
+    }
+
+    function selectPayment(metodo) {
+        metodoPago = metodo;
+        document.querySelectorAll('.pay-option').forEach(el => el.classList.remove('selected'));
+        document.querySelector(`.pay-option.${metodo === 'yape' ? 'yape' : 'cash'}`).classList.add('selected');
+    }
+
+    function procesarCheckout() {
+        if (carrito.length === 0) return alert("Agrega productos primero.");
+        
+        // Verificar si está cerrado al momento de pedir
+        const textStatus = document.getElementById('status-text').innerText;
+        if(textStatus.includes("Cerrado")) {
+            const confirmar = confirm("Actualmente estamos fuera del horario de atención (7PM - 11:30PM). ¿Deseas enviar el pedido de todas formas para programarlo?");
+            if(!confirmar) return;
+        }
+
+        if (metodoPago === 'yape') {
+            toggleCart();
+            setTimeout(() => {
+                document.getElementById('yapeModal').classList.add('show');
+                document.getElementById('yapeOverlay').classList.add('open');
+            }, 300);
+        } else {
+            enviarPedidoWhatsApp('Efectivo');
+        }
+    }
+
+    function closeYapeModal() {
+        document.getElementById('yapeModal').classList.remove('show');
+        document.getElementById('yapeOverlay').classList.remove('open');
+    }
+
+    function mostrarToast() {
+        const toast = document.getElementById("toast");
+        toast.className = "show";
+        setTimeout(() => toast.className = toast.className.replace("show", ""), 2500);
+    }
+
+    function enviarPedidoWhatsApp(pagoSeleccionado) {
+        const numero = "51932115530"; 
+        const notas = document.getElementById('order-notes').value.trim();
+        let total = 0;
+        
+        // Cadenas limpias sin emojis especiales para evitar roturas por codificación ANSI
+        let msj = "Hola *La Burra*\nQuiero realizar este pedido:\n\n";
+
+        carrito.forEach(item => {
+            msj += `*${item.cantidad}x ${item.nombre}*\n`;
+            msj += ` - ${item.detalles}\n`;
+            msj += ` - S/ ${item.subtotal.toFixed(2)}\n\n`;
+            total += item.subtotal;
+        });
+
+        if(notas !== "") {
+            msj += `*Instrucciones Especiales:*\n_${notas}_\n\n`;
+        }
+
+        msj += `*TOTAL A PAGAR: S/ ${total.toFixed(2)}*\n`;
+        msj += `*Pago:* ${pagoSeleccionado}\n\n`;
+        
+        if(pagoSeleccionado === 'Yape') msj += "_(Te adjunto mi voucher por aquí)_\n";
+        
+        msj += "¡Quedo atento, gracias!";
+
+        window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msj)}`, '_blank');
+        closeYapeModal();
+    }
+    
+    actualizarUICarrito();
+</script>
+
+</body>
+</html>
